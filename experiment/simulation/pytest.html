@@ -7,45 +7,48 @@ Author: Prakriti Dhang
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.jsdelivr.net/pyodide/v0.23.2/full/pyodide.js"></script>
-    <link rel="stylesheet" href="./css/main.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.6.2/joint.css" />
+  <link rel="stylesheet" href="./css/main.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.6.2/joint.css" />
 
 
 
-   
+
 </head>
-<body >
+
+<body>
   <header id="header">
     <div class="container-fluid p-3 ">
       <div class="card">
-      <div class="row">
-        <div class="col-md-2">
-        <img src="images/vlabs-logo.png" class=" rounded img-fluid" alt="vlabs-logo" >
+        <div class="row">
+          <div class="col-md-2">
+            <img src="images/vlabs-logo.png" class=" rounded img-fluid" alt="vlabs-logo">
+          </div>
+          <div class="col-md-8 p-4">
+            <p class="h4 fw-bold text-primary text-center"> Virtual Lab IIT Kharagpur</p>
+          </div>
+          <div class="col-md-2">
+            <img src="images/iitkgp-logo.png" class=" rounded img-fluid" alt="iitkgplogo">
+          </div>
+        </div>
       </div>
-      <div class="col-md-8 p-4">
-        <p class="h4 fw-bold text-primary text-center"> Virtual Lab IIT Kharagpur</p>
-      </div>
-      <div class="col-md-2">
-        <img src="images/iitkgp-logo.png" class=" rounded img-fluid" alt="iitkgplogo" >
-      </div>
-      </div>
-    </div>
     </div>
   </header>
- 
+
   <div class="container-fluid p-2 ">
-<hr>
-   
-    <nav class="navbar navbar-expand-lg navbar-light  justify-content-center">
+    <hr>
+
+    <nav class="navbar navbar-expand-lg navbar-custom  justify-content-center">
       <div class="container-fluid">
-       
-        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -53,9 +56,7 @@ Author: Prakriti Dhang
             <li class="nav-item fs-5">
               <a class="nav-link " aria-current="page" href="./index.html">Aim</a>
             </li>
-            <li class="nav-item fs-5">
-              <a class="nav-link" href="#">Experiment Name</a>
-            </li>
+
             <li class="nav-item fs-5">
               <a class="nav-link" href="#">Theory</a>
             </li>
@@ -67,7 +68,7 @@ Author: Prakriti Dhang
             </li>
 
             <li class="nav-item fs-5">
-              <a class="nav-link fw-bold  active" target="_blank" href="./pytest.html" >Simulation</a>
+              <a class="nav-link fw-bold  active" target="_blank" href="./pytest.html">Simulation</a>
             </li>
 
             <li class="nav-item fs-5">
@@ -81,95 +82,100 @@ Author: Prakriti Dhang
               <a class="nav-link" href="#">Contributors</a>
             </li>
           </ul>
-    
+
+        </div>
       </div>
-    </div>
     </nav>
- <hr>
-</div>
+    <hr>
+  </div>
 
 
-   
 
-    <script>
-        var codev;
-       
-        //function showoutput(s) {
-            
-          //  document.getElementById("outputdisplay").value=s;
-      //}
-    
-        async function main() {
-        pyodide =await loadPyodide();
-  
-        return pyodide;
-      } 
-       
-      async function evaluatePython() {
+
+  <script>
+    var codev;
+
+    //function showoutput(s) {
+
+    //  document.getElementById("outputdisplay").value=s;
+    //}
+
+    async function main() {
+      pyodide = await loadPyodide();
+
+      return pyodide;
+    }
+
+    async function evaluatePython() {
       // let pyodide = await loadPyodide();
-       //await pyodide.loadPackagesFromImports(code.value)
-       var codeoutput=document.getElementById("outputdisplay");
-         
-       let pyodide = await loadPyodide({stdout: (text) => {codeoutput.value += text;}});
-        codev = document.getElementById("code").value;
-        await pyodide.loadPackage("micropip");
+      //await pyodide.loadPackagesFromImports(code.value)
+      var codeoutput = document.getElementById("outputdisplay");
+
+      let pyodide = await loadPyodide({ stdout: (text) => { codeoutput.value += text; } });
+      codev = document.getElementById("code").value;
+      await pyodide.loadPackage("micropip");
       const micropip = pyodide.pyimport("micropip");
       await pyodide.loadPackage("numpy");
       await pyodide.loadPackage("scikit-learn")
       await pyodide.loadPackage("matplotlib")
+      await pyodide.loadPackage("ipython");
+      const outpute = pyodide.runPython(codev);
 
-       const outpute = pyodide.runPython(codev);
-     
-      
-       
-       
-      }
-     
-      main();
-      </script>
 
-<div class="container-fluid p-4">
+
+
+    }
+
+    main();
+  </script>
+
+  <div class="container-fluid p-4">
     <div class="row">
-        
-        <div class="col-md-6">
-            <textarea id="code" class="form-control" placeholder="Enter your Python code here"  rows="22"></textarea> <!-- Sum([1,2,3,4,5])-->
-            <br>
-            
-            <button class="btn btn-dark " onclick="evaluatePython()">Execute</button>
-        </div>
-        <div class="col-md-6">
-            <textarea id="outputdisplay" class="form-control " style="width: 100%;" rows="10" readonly placeholder="Results"></textarea><br>
-            <textarea id="outputdisplay" class="form-control " style="width: 100%;" rows="10" readonly placeholder="Plots"></textarea>
-        </div>
+
+      <div class="col-md-6">
+        <textarea id="code" class="form-control" placeholder="Enter your Python code here" rows="10"></textarea>
+        <!-- Sum([1,2,3,4,5])-->
+        <br>
+
+        <button class="btn btn-dark " onclick="evaluatePython()">Execute</button>
+      </div>
+      <div class="col-md-6">
+        <textarea id="outputdisplay" class="form-control " style="width: 100%;" rows="10" readonly
+          placeholder="Results"></textarea><br>
+        <textarea id="outputdisplay" class="form-control " style="width: 100%;" rows="10" readonly
+          placeholder="Plots"></textarea>
+      </div>
     </div>
-</div>
+  </div>
 
 
-<div class="container-fluid p-1 ">
-  <hr>
-<footer class="text-white text-center" >
-  
-    <p class="text-primary fs-5 text-center" >  Copyright  © 2023  IIT Kharagpur, <a class="text-primary fs-5 text-center " href="http://vlabs.iitkgp.ac.in/">Virtual Lab</a></p>
- 
-</footer>
-<hr>
-</div>
+  <div class="container-fluid p-1 ">
+    <hr>
+    <footer class="text-white text-center">
+
+      <p class="text-primary fs-5 text-center"> Copyright © 2023 IIT Kharagpur, <a
+          class="text-primary fs-5 text-center " href="http://vlabs.iitkgp.ac.in/">Virtual Lab</a></p>
+
+    </footer>
+    <hr>
+  </div>
 
 
-  
-   
-    <!--script src="./js/leader-line.min.js"></script-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+  <!--script src="./js/leader-line.min.js"></script-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./js/main.js"></script>
-    
-    
+  <script src="./js/main.js"></script>
 
-   <script> 
 
-    
-  
- 
+
+  <script>
+
+
+
+
   </script>
 </body>
+
 </html>
