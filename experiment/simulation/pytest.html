@@ -42,9 +42,9 @@ Author: Prakriti Dhang
   </header>
 
   <div class="container-fluid p-2 ">
-    <hr>
+  
 
-    <nav class="navbar navbar-expand-lg navbar-custom  justify-content-center">
+    <nav class="navbar navbar-custom  justify-content-center">
       <div class="container-fluid">
 
         <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -86,7 +86,7 @@ Author: Prakriti Dhang
         </div>
       </div>
     </nav>
-    <hr>
+
   </div>
 
 
@@ -107,18 +107,19 @@ Author: Prakriti Dhang
     }
 
     async function evaluatePython() {
-      // let pyodide = await loadPyodide();
+      //let pyodide = await loadPyodide();
       //await pyodide.loadPackagesFromImports(code.value)
       var codeoutput = document.getElementById("outputdisplay");
 
       let pyodide = await loadPyodide({ stdout: (text) => { codeoutput.value += text; } });
+
       codev = document.getElementById("code").value;
       await pyodide.loadPackage("micropip");
       const micropip = pyodide.pyimport("micropip");
       await pyodide.loadPackage("numpy");
       await pyodide.loadPackage("scikit-learn")
       await pyodide.loadPackage("matplotlib")
-      await pyodide.loadPackage("ipython");
+      //await pyodide.loadPackage("ipython");
       const outpute = pyodide.runPython(codev);
 
 
